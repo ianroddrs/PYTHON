@@ -26,14 +26,16 @@ class Conta:
 
     def get_saldo(self):
         return self.__saldo
-
-    def get_limite(self):
-        return self.__limite
     
     def get_titular(self):
         return self.__titular
 
-    def set_limite(self, limite):
+    @property
+    def limite(self):
+        return self.__limite
+
+    @limite.setter
+    def limite(self, limite):
         self.__limite = limite
 
 
@@ -58,3 +60,9 @@ conta3 = Conta(221, "silva", 200.0, 3000.0)
 # conta1.extrato()
 
 conta2.transfere(10.0, conta1)
+
+print(conta2.limite)
+
+conta2.limite = 200000.00
+
+print(conta2.limite)
