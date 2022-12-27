@@ -14,20 +14,33 @@ class Conta:
 
     def deposita(self, valor):
         self.__saldo += valor
-        print(f"deposito de {valor}")
+        # print(f"deposito de {valor}")
+
+    def __pode_sacar(self, valor_a_sacar):
+        valor_disponivel_a_sacar = self.__saldo + self.__limite
+        return valor_a_sacar <= valor_disponivel_a_sacar
 
     def saca(self, valor):
-        self.__saldo -= valor
-        print(f"saque de {valor}")
+        if self.__pode_sacar(valor):
+            self.__saldo -= valor
+            # print(f"saque de {valor}")
+        else:
+            print(f"O valor {valor} passou o limite.")
 
     def transfere(self, valor, destino):
         self.saca(valor)
         destino.deposita(valor)
 
-    def get_saldo(self):
+    @property
+    def numero(self):
+        return self.__numero
+
+    @property
+    def saldo(self):
         return self.__saldo
     
-    def get_titular(self):
+    @property
+    def titular(self):
         return self.__titular
 
     @property
@@ -37,6 +50,14 @@ class Conta:
     @limite.setter
     def limite(self, limite):
         self.__limite = limite
+
+    @staticmethod
+    def codigo_banco():
+        return "001"
+    
+    @staticmethod
+    def codigos_bancos():
+        return {'BB': '001', 'Caixa': '104', 'Bradesco':'237'}
 
 
 
@@ -59,10 +80,10 @@ conta3 = Conta(221, "silva", 200.0, 3000.0)
 
 # conta1.extrato()
 
-conta2.transfere(10.0, conta1)
+# conta2.transfere(10.0, conta1)
 
-print(conta2.limite)
+# print(conta2.limite)
 
-conta2.limite = 200000.00
+# conta2.limite = 200000.00
 
-print(conta2.limite)
+# print(conta2.limite)
